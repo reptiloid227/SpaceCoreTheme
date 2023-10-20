@@ -37,3 +37,5 @@ add_filter(/**
  */ 'excerpt_more', function ($more) {
     return '...';
 });
+
+
