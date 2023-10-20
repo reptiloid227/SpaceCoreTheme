@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="156d258b-92b0-4d00-8382-46bc8459531f" name="Changes" comment="Фиксы и дополнения&#10;&#10;1. Обновление плагинов&#10;2. Добавлен метод для отключения комментариев">
-      <change afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/js/inc/ajax-form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/js/inc/customizer-colors.js" afterDir="false" />
+    <list default="true" id="156d258b-92b0-4d00-8382-46bc8459531f" name="Changes" comment="Реализовал customizer для цветов">
+      <change afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/StructureMenu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/assets/css/main.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/Core.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/Core.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/custom.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/custom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/SpaceCoreTheme/inc/helpers.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +93,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1697828361602</updated>
-      <workItem from="1697828364833" duration="3048000" />
+      <workItem from="1697828364833" duration="4176000" />
     </task>
     <task id="LOCAL-00001" summary="Фиксы и дополнения&#10;&#10;1. Обновление плагинов&#10;2. Добавлен метод для отключения комментариев">
       <option name="closed" value="true" />
@@ -106,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697829885376</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Реализовал customizer для цветов">
+      <option name="closed" value="true" />
+      <created>1697831834420</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697831834420</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +132,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Фиксы и дополнения&#10;&#10;1. Обновление плагинов&#10;2. Добавлен метод для отключения комментариев" />
-    <option name="LAST_COMMIT_MESSAGE" value="Фиксы и дополнения&#10;&#10;1. Обновление плагинов&#10;2. Добавлен метод для отключения комментариев" />
+    <MESSAGE value="Реализовал customizer для цветов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализовал customizer для цветов" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\OSPanel\domains\SpaceCoreTheme.loc</wordpressPath>

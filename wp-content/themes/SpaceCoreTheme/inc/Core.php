@@ -146,6 +146,29 @@ class SpaceCoreTheme {
 		wp_localize_script( 'customizer-colors', 'customizerData', [ 'colors' => self::$settings['colors'] ] );
 	}
 
+	public static function getMenu($slugMenu):array {
+		require_once('structureMenu.php');
+		$oMainMenu = new StructureMenu($slugMenu);
+		return $oMainMenu->getItemsStructureMenu();
+    }
+
+
+	/**
+	 * Передача параметров в AJAX
+	 * @return void
+	 */
+	public static function addAJAX():void
+	{
+		wp_enqueue_script('ajax-form', get_template_directory_uri() . '/js/inc/ajax-form.js', ['jquery'], '1.0', true);
+
+		wp_localize_script('ajax-form', 'ajax_form_object', [
+			'url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('ajax-form-nonce'),
+		]);
+	}
+
+
+
 	/**
 	 * Генерируем секцию и настройки секции
 	 * @return void
@@ -180,16 +203,15 @@ class SpaceCoreTheme {
 	 */
 	public function init(): object|null {
 		add_action( 'wp_enqueue_scripts', [ self::getInstance(), 'removeWpDefaultScriptsAndStyles' ] );
-		self::disableGutenBerg();
 		self::addThemeSupport();
 		self::registerAllMenus();
 		add_action( 'wp_enqueue_scripts', [ self::getInstance(), 'enqueueAllScriptsAndStyles' ] );
 		add_action( 'wp_head', [ self::getInstance(), 'addRootStyles' ] );
 		self::addShortCodeYoastSEO();
 		add_filter( 'mime_types', [ self::getInstance(), 'enableWebp' ] );
-		self::removeComments();
 		add_action( 'customize_register', [ self::getInstance(), 'addCustomizerSettings' ] );
 		add_action( 'customize_preview_init', [ self::getInstance(), 'customizerPreviewScripts' ] );
+		add_action('wp_enqueue_scripts', [self::getInstance(), 'addAJAX']);
 
 
 		return self::getInstance();
@@ -205,22 +227,6 @@ class SpaceCoreTheme {
 		}
 
 		return self::$instance;
-	}
-
-	/**
-	 * Отключение редактора гутенберг
-	 * @return void
-	 */
-	private static function disableGutenBerg(): void {
-		if ( 'disable_gutenberg' ) {
-			remove_theme_support( 'core-block-patterns' );
-			add_filter( 'use_block_editor_for_post_type', '__return_false', 100 );
-			remove_action( 'wp_enqueue_scripts', 'wp_common_block_scripts_and_styles' );
-			add_action( 'admin_init', function () {
-				remove_action( 'admin_notices', [ 'WP_Privacy_Policy_Content', 'notice' ] );
-				add_action( 'edit_form_after_title', [ 'WP_Privacy_Policy_Content', 'notice' ] );
-			} );
-		}
 	}
 
 	/**
@@ -263,30 +269,6 @@ class SpaceCoreTheme {
 		add_filter( 'wpseo_metadesc', [ self::getInstance(), 'returnShortcode' ], 100 );
 		add_filter( 'wpseo_twitter_description', [ self::getInstance(), 'returnShortcode' ], 100 );
 		add_filter( 'wpseo_opengraph_desc', [ self::getInstance(), 'support_wpseo_opengrap_shortcodes' ] );
-	}
-
-	/**
-	 * Отключить комментарии Wordpress
-	 */
-
-	private static function removeComments(): void {
-		add_action( 'admin_init', function () {
-			global $pagenow;
-			if ( $pagenow === 'edit-comments.php' ) {
-				wp_redirect( admin_url() );
-				exit;
-			}
-			remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
-			foreach ( get_post_types() as $post_type ) {
-				if ( post_type_supports( $post_type, 'comments' ) ) {
-					remove_post_type_support( $post_type, 'comments' );
-					remove_post_type_support( $post_type, 'trackbacks' );
-				}
-			}
-		} );
-		add_action( 'admin_menu', function () {
-			remove_menu_page( 'edit-comments.php' );
-		} );
 	}
 
 }

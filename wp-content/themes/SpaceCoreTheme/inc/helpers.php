@@ -15,3 +15,17 @@ function debug(mixed $var, bool $isArray = true): void{
     }
     echo "</pre>";
 }
+
+
+
+function constructTitle($titleArray):string
+{
+	$el = $titleArray['title']['element'];
+	$title = $titleArray['title']['title'];
+	$class = null;
+	if ($titleArray['title']['class'] != null) {
+		$class = $titleArray['title']['class'];
+		$class = "class='$class'";
+	}
+	return "<$el $class>$title</$el>";
+}
