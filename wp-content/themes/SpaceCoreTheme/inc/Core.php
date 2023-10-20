@@ -138,6 +138,42 @@ class SpaceCoreTheme {
 		wp_deregister_script( 'wp-embed' );
 	}
 
+	public static function customizerPreviewScripts(): void {
+		wp_enqueue_script( 'customizer-colors', get_template_directory_uri() . '/assets/js/inc/customizer-colors.js', [
+				'customize-preview',
+				'jquery'
+			], '1.0', true );
+		wp_localize_script( 'customizer-colors', 'customizerData', [ 'colors' => self::$settings['colors'] ] );
+	}
+
+	/**
+	 * Генерируем секцию и настройки секции
+	 * @return void
+	 */
+	public static function addCustomizerSettings(): void {
+		global $wp_customize;
+		$colors = self::$settings['colors'];
+		$wp_customize->add_section( 'site_colors', array(
+				'title'    => 'Цвета сайта',
+				'priority' => 30,
+			) );
+
+		if ( ! empty( $colors ) ) {
+			foreach ( $colors as $color ) {
+				$wp_customize->add_setting( $color['key'], array(
+						'default'           => $color['value'],
+						'transport'         => 'postMessage',
+						'sanitize_callback' => 'sanitize_hex_color',
+					) );
+				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color['key'], [
+					'label'    => $color['title'],
+					'section'  => 'site_colors',
+					'settings' => $color['key'],
+				] ) );
+			}
+		}
+	}
+
 	/**
 	 * Инициализация темы
 	 * @return object|null
@@ -151,7 +187,10 @@ class SpaceCoreTheme {
 		add_action( 'wp_head', [ self::getInstance(), 'addRootStyles' ] );
 		self::addShortCodeYoastSEO();
 		add_filter( 'mime_types', [ self::getInstance(), 'enableWebp' ] );
-//		self::removeComments();
+		self::removeComments();
+		add_action( 'customize_register', [ self::getInstance(), 'addCustomizerSettings' ] );
+		add_action( 'customize_preview_init', [ self::getInstance(), 'customizerPreviewScripts' ] );
+
 
 		return self::getInstance();
 	}
@@ -244,10 +283,10 @@ class SpaceCoreTheme {
 					remove_post_type_support( $post_type, 'trackbacks' );
 				}
 			}
-		});
+		} );
 		add_action( 'admin_menu', function () {
 			remove_menu_page( 'edit-comments.php' );
-		});
+		} );
 	}
 
 }

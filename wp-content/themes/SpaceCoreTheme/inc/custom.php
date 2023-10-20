@@ -6,6 +6,8 @@
  */
 function addAJAX():void
 {
+	wp_enqueue_scripts('ajax-form', get_template_directory_uri() . '/js/inc/ajax-form.js', ['jquery'], '1.0', true);
+
     wp_localize_script('ajax-form', 'ajax_form_object', [
         'url' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('ajax-form-nonce'),
